@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Home | PHP Motors</title>
+    <title><?php echo $pageTitle; ?> | PHP Motors</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/phpmotors/css/style.css" type="text/css" rel="stylesheet" media="screen">
   </head>
@@ -12,7 +12,7 @@
         <?php include $_SERVER['DOCUMENT_ROOT'] . "/phpmotors/common/header.php" ?>
       </header>
       <nav>
-        <?php include $_SERVER['DOCUMENT_ROOT'] . "/phpmotors/common/nav.php" ?>
+        <?php echo $navList; ?>
       </nav>
       <main>
         <h1>Welcome to PHP Motors!</h1>

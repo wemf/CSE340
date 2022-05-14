@@ -124,7 +124,6 @@ main {
 #delorean li {
   list-style: none;
   color: #4c96d7;
-
 }
 
 #delorean li h2 {
@@ -288,4 +287,25 @@ figure figcaption {
   #add-ons, #review {
     margin-top: 0;
   }
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.field input {
+  display: block;
+}
+.btn {
+  display: block;
+  font-size: 1.1rem;
+}
+
+.btn--primary {
+  background-color: #4c96d7;
+}
+
+.btn--secondary {
+  background-color: #3a3a3a;
+  color: #ffffff;
 }

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Content Title | PHP Motors</title>
+    <title><?php echo $pageTitle; ?> | PHP Motors</title>
     <!-- device-width is the width of the screen in CSS pixels -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- screen is used for computer screens, tablets, smart-phones etc. -->
@@ -18,7 +18,7 @@
         <?php include $_SERVER['DOCUMENT_ROOT'] . "/phpmotors/common/header.php" ?>
       </header>
       <nav>
-        <?php include $_SERVER['DOCUMENT_ROOT'] . "/phpmotors/common/nav.php" ?>
+        <?php echo $navList; ?>
       </nav>
       <main>
         <h1>Content Title Here</h1>
