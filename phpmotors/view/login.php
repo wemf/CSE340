@@ -16,6 +16,12 @@
             </nav>
             <main>
                 <h1>Sign in</h1>
+                <?php 
+                    if (isset($message)) { 
+                        $color = $message_type == 'success' ? 'green' : 'red';
+                        echo "<span style='color: ".$color.";'>".$message."</span>"; 
+                    } 
+                ?>
                 <form action="/">
                     <div class="field">
                         <label for="userEmail" class="">Email</label>

@@ -16,23 +16,30 @@
             </nav>
             <main>
                 <h1>Register</h1>
-                <form action="/">
+                <?php 
+                    if (isset($message)) { 
+                        $color = $message_type == 'success' ? 'green' : 'red';
+                        echo "<span style='color: ".$color.";'>".$message."</span>"; 
+                    } 
+                ?>
+                <form method="post" action="/phpmotors/accounts/index.php">
+                    <input type="hidden" name="action" value="register">
                     <div class="field">
-                        <label for="userFirstname">First Name</label><br>
-                        <input name="userFirstname" id="userFirstname" type="text" required>
+                        <label for="clientFirstname">First Name</label><br>
+                        <input name="clientFirstname" id="clientFirstname" type="text">
                     </div>
                     <div class="field">
-                        <label for="userLastname">Last Name</label><br>
-                        <input name="userLastname" id="userLastname" type="text" required>
+                        <label for="clientLastname">Last Name</label><br>
+                        <input name="clientLastname" id="clientLastname" type="text">
                     </div>
                     <div class="field">
-                        <label for="userEmail">Email</label><br>
-                        <input name="userEmail" id="userEmail" type="text" required>
+                        <label for="clientEmail">Email</label><br>
+                        <input name="clientEmail" id="clientEmail" type="text">
                     </div>
                     <div class="field">
                         <p>Passwords must be at least 8 characters and contain at least 1 number, 1 captital letter and 1 special character</p>
-                        <label for="userPassword">Password</label>
-                        <input name="userPassword" type="password" id="userPassword" required>
+                        <label for="clientPassword">Password</label>
+                        <input name="clientPassword" type="password" id="clientPassword">
                         <br/>
                         <button class="btn btn--secondary" type="button" onclick="showPassword()">Show password</button>
                     </div>
