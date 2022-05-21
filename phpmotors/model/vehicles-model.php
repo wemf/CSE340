@@ -28,7 +28,7 @@ function addVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbna
     $db = phpmotorsConnect();
     // The SQL statement
     $sql = 'INSERT INTO inventory (invMake, invModel, invDescription, invImage, invThumbnail, invPrice, invStock, invColor, classificationId)
-    VALUES (:invMake, :invModel, :invDescription, :invImage, :invThumbnail, :Price, :Stock, :Color, :classificationId)';
+    VALUES (:invMake, :invModel, :invDescription, :invImage, :invThumbnail, :invPrice, :invStock, :invColor, :classificationId)';
     // Create the prepared statement using the phpmotors connection
     $stmt = $db->prepare($sql);
     // The next seven lines replace the placeholders in the SQL
