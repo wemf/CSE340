@@ -10,15 +10,8 @@
     // Get the array of classifications
 	$classifications = getClassifications();
 
-    // var_dump($classifications);
-    // exit;
-
     // Build a navigation bar using the $classifications array
     require '../common/nav.php';
-
-    //nav list check
-    // echo $navList;
-    // exit;
 
     $action = filter_input(INPUT_POST, 'action');
     if ($action == NULL) {

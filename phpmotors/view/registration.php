@@ -18,7 +18,7 @@
                 <h1>Register</h1>
                 <?php 
                     if (isset($message)) { 
-                        $color = $message_type == 'success' ? 'green' : 'red';
+                        $color = $message_type == 'success' ? 'darkgreen' : 'darkred';
                         echo "<span style='color: ".$color.";'>".$message."</span>"; 
                     } 
                 ?>
