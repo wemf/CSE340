@@ -310,11 +310,11 @@ figure figcaption {
   color: #ffffff;
 }
 
-input:focus:invalid {
+input:focus:invalid, textarea:focus:invalid {
   background: lightcoral;
 }
 
-input:focus:valid {
+input:focus:valid, textarea:focus:valid {
   background: darkgreen;
   color: #ffffff;
 }
