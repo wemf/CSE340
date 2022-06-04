@@ -53,7 +53,7 @@
                         </div>
                         <div class="field">
                             <label for="invDescription">Description:</label><br>
-                            <textarea name="invDescription" id="invDescription"><?php if(isset($invDescription)){echo $invDescription;} ?> required</textarea>
+                            <textarea name="invDescription" id="invDescription" required><?php if(isset($invDescription)){echo $invDescription;} ?></textarea>
                         </div>
                         <div class="field">
                             <label for="invImage">Image Path:</label><br>
