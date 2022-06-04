@@ -309,3 +309,13 @@ figure figcaption {
   background-color: #3a3a3a;
   color: #ffffff;
 }
+
+input:focus:invalid {
+  background: lightcoral;
+}
+
+input:focus:valid {
+  background: darkgreen;
+  color: #ffffff;
+}
+ 
