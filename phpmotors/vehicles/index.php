@@ -36,7 +36,7 @@ switch ($action) {
             $message_type = "danger";
             $message = "<p>Error while saving the classification.</p>";
         }
-        include '../view/vehicles-man.php';
+        include '../view/add-classification.php';
         exit;
         
 
@@ -73,7 +73,7 @@ switch ($action) {
             $message_type = "danger";
             $message = "<p>Error while saving the Vehicle.</p>";
         }        
-        include '../view/vehicles-man.php';
+        include '../view/add-vehicle.php';
         exit;
 
     default:
