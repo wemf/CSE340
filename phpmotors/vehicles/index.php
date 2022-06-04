@@ -2,10 +2,10 @@
 require_once '../library/connections.php'; // database connection file
 require_once '../model/main-model.php'; // model file for main
 require_once '../model/vehicles-model.php'; // model file for vehicles
+require_once '../library/functions.php'; 
 
-// Get the array of classifications
 $classifications = getClassifications();
-require '../common/nav.php';
+$navList = buildNav($classifications);
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -19,8 +19,8 @@ switch ($action) {
         break;
 
     case 'addClassification':
-        $pageTitle = 'Add Vehicle';
-        $classification = filter_input(INPUT_POST, 'classification');
+        $pageTitle = 'Add Classification';
+        $classification = trim(filter_input(INPUT_POST, 'classification', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         if(empty($classification)) {
             $message_type = "danger";
             $message = '<p>Please provide information for this empty form field.</p>';
@@ -48,15 +48,15 @@ switch ($action) {
     case "addVehicleToDatabase":
         $pageTitle = 'Add Vehicle';
         
-        $invMake = trim(filter_input(INPUT_POST, 'invMake'));
-        $invModel = trim(filter_input(INPUT_POST, 'invModel')); 
-        $invDescription = trim(filter_input(INPUT_POST, 'invDescription'));
-        $invImage = trim(filter_input(INPUT_POST, 'invImage'));
-        $invThumbnail = trim(filter_input(INPUT_POST, 'invThumbnail'));
-        $invPrice = trim(filter_input(INPUT_POST, 'invPrice'));
-        $invStock = trim(filter_input(INPUT_POST, 'invStock'));
-        $invColor = trim(filter_input(INPUT_POST, 'invColor'));
-        $classificationId = trim(filter_input(INPUT_POST, 'classificationId'));
+        $invMake = trim(filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $invModel = trim(filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_FULL_SPECIAL_CHARS)); 
+        $invDescription = trim(filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $invImage = trim(filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $invThumbnail = trim(filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $invPrice = trim(filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT));
+        $invStock = trim(filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT));
+        $invColor = trim(filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $classificationId = trim(filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_NUMBER_INT));
         
         if(empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor) || empty($classificationId)){
             $message_type = "danger";

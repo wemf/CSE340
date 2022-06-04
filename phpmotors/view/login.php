@@ -22,14 +22,15 @@
                         echo "<span style='color: ".$color.";'>".$message."</span>"; 
                     } 
                 ?>
-                <form action="/">
+                <form action="/phpmotors/accounts/index.php" method="post">
+                    <input type="hidden" name="action" value="Login">
                     <div class="field">
-                        <label for="userEmail" class="">Email</label>
-                        <input name="userEmail" type="text" id="userEmail" required>
+                        <label for="clientEmail" class="">Email</label>
+                        <input name="clientEmail" type="text" id="clientEmail" required>
                     </div>
                     <div class="field">
-                        <label for="userPassword">Password</label>
-                        <input name="userPassword" type="password" id="userPassword" required>
+                        <label for="clientPassword">Password</label>
+                        <input name="clientPassword" type="password" id="clientPassword" required pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
                     </div>
                     <div class="field">
                         <button class="btn btn--primary" type="submit">Sign-in</button>

@@ -45,35 +45,35 @@
                         </div>
                         <div class="field">
                             <label for="invMake">Make:</label><br>
-                            <input type="text" name="invMake" id="invMake">
+                            <input type="text" name="invMake" id="invMake" <?php if(isset($invMake)){echo "value='$invMake'";} ?> required>
                         </div>
                         <div class="field">
                             <label for="invModel">Model:</label><br>
-                            <input type="text" name="invModel" id="invModel">
+                            <input type="text" name="invModel" id="invModel" <?php if(isset($invModel)){echo "value='$invModel'";} ?> required>
                         </div>
                         <div class="field">
                             <label for="invDescription">Description:</label><br>
-                            <textarea name="invDescription" id="invDescription"></textarea>
+                            <textarea name="invDescription" id="invDescription"><?php if(isset($invDescription)){echo $invDescription;} ?> required</textarea>
                         </div>
                         <div class="field">
                             <label for="invImage">Image Path:</label><br>
-                            <input type="text" name="invImage" id="invImage" value="/phpmotors/images/no-image.png">
+                            <input type="text" name="invImage" id="invImage" <?php if(isset($invImage)){echo "value='$invImage'";} else {echo "value='/phpmotors/images/no-image.png'";} ?> required>
                         </div>
                         <div class="field">
                             <label for="invThumbnail">Thumbnail Path:</label><br>
-                            <input type="text" name="invThumbnail" id="invThumbnail" value="/phpmotors/images/no-image.png">
+                            <input type="text" name="invThumbnail" id="invThumbnail" value="/phpmotors/images/no-image.png" <?php if(isset($invThumbnail)){echo "value='$invThumbnail'";} else {echo "value='/phpmotors/images/no-image.png'";} ?> required>
                         </div>
                         <div class="field">
                             <label for="invPrice">Price:</label><br>
-                            <input type="text" name="invPrice" id="invPrice">
+                            <input type="text" name="invPrice" id="invPrice" <?php if(isset($invPrice)){echo "value='$invPrice'";} ?> required>
                         </div>
                         <div class="field">
                             <label for="invStock">Stock:</label><br>
-                            <input type="text" name="invStock" id="invStock">
+                            <input type="text" name="invStock" id="invStock" <?php if(isset($invStock)){echo "value='$invStock'";} ?> required>
                         </div>
                         <div class="field">
                             <label for="invColor">Color:</label><br>
-                            <input type="text" name="invColor" id="invColor">
+                            <input type="text" name="invColor" id="invColor" <?php if(isset($invColor)){echo "value='$invColor'";} ?> required>
                         </div>
                         <div class="field">
                             <button class="btn btn--primary" type="submit">Add Vehicle</button>

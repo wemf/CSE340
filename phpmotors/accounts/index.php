@@ -7,11 +7,13 @@
     require_once '../model/main-model.php';
     // Get the accounts model
     require_once '../model/accounts-model.php';
+    // Get the functions library
+    require_once '../library/functions.php';
     // Get the array of classifications
 	$classifications = getClassifications();
 
     // Build a navigation bar using the $classifications array
-    require '../common/nav.php';
+    $navList = buildNav($classifications);
 
     $action = filter_input(INPUT_POST, 'action');
     if ($action == NULL) {
@@ -23,7 +25,27 @@
             $pageTitle = 'Account Login';
             include '../view/login.php';
             break;
-            
+
+        case 'Login':
+            $pageTitle = 'Account Login';
+            $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
+            $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $clientEmail = checkEmail($clientEmail);
+            $checkPassword = checkPassword($clientPassword);
+            if(empty($clientEmail) || empty($checkPassword)){
+                $message_type = 'danger';
+                $message = '<p>Please provide information for all empty form fields.</p>';
+                include '../view/login.php';
+                exit; 
+            } else {
+                // TODO Validate if credentials are correct (not required this week)
+                $message_type = 'success';
+                $message = '<p>Login successfully.</p>';
+                include '../view/login.php';
+                exit; 
+            }
+            break;
+        
         case 'registration':
             $pageTitle = 'Account Registration';
             include '../view/registration.php'; 
@@ -32,19 +54,24 @@
         case 'register':
             $pageTitle = 'Account Registration';
             // Filter and store the data
-            $clientFirstname = trim(filter_input(INPUT_POST, 'clientFirstname'));
-            $clientLastname = trim(filter_input(INPUT_POST, 'clientLastname'));
-            $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail'));
-            $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword'));
+            $clientFirstname = trim(filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $clientLastname = trim(filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
+            $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+
+            $clientEmail = checkEmail($clientEmail);
+            $checkPassword = checkPassword($clientPassword);
             // Check for missing data
-            if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($clientPassword)){
+            if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($checkPassword)){
                 $message_type = 'danger';
                 $message = '<p>Please provide information for all empty form fields.</p>';
                 include '../view/registration.php';
                 exit; 
             }
+            // Hash the checked password
+            $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
             // Send the data to the model
-            $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassword);
+            $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $hashedPassword);
             // Check and report the result
             if($regOutcome === 1){
                 $message_type = "success";

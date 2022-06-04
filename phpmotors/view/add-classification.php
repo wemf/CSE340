@@ -27,7 +27,7 @@
                         <input type="hidden" name="action" value="addClassification">
                         <div class="field">
                             <label for="classification">Classification Name</label><br>
-                            <input type="text" name="classification" id="classification">
+                            <input type="text" name="classification" id="classification" <?php if(isset($classification)){echo "value='$classification'";} ?> required>
                         </div>
                         <div class="field">
                             <button class="btn btn--primary" type="submit">Add Classification</button>
