@@ -318,4 +318,11 @@ input:focus:valid, textarea:focus:valid {
   background: darkgreen;
   color: #ffffff;
 }
- 
+
+.success {
+  color: darkgreen;
+}
+
+.notice {
+  color: darkred;
+}

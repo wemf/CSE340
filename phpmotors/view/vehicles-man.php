@@ -1,3 +1,9 @@
+<?php
+if ($_SESSION['clientData']['clientLevel'] < 2) {
+    header('location: /phpmotors/');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,12 +22,7 @@
             </nav>
             <main>
                 <h2>Vehicle Management</h2>
-                <?php 
-                    if (isset($message)) { 
-                        $color = $message_type == 'success' ? 'darkgreen' : 'darkred';
-                        echo "<span style='color: ".$color.";'>".$message."</span>"; 
-                    } 
-                ?>
+                <?php if (isset($_SESSION['message'])) { echo $_SESSION['message']; unset($_SESSION['message']); } ?>
                 <ul>
                     <li>
                         <a class="blackfont" href="/phpmotors/vehicles/index.php?action=add-vehicle">Add Vehicle</a><br>

@@ -16,12 +16,7 @@
             </nav>
             <main>
                 <h1>Sign in</h1>
-                <?php 
-                    if (isset($message)) { 
-                        $color = $message_type == 'success' ? 'darkgreen' : 'darkred';
-                        echo "<span style='color: ".$color.";'>".$message."</span>"; 
-                    } 
-                ?>
+                <?php if (isset($_SESSION['message'])) { echo $_SESSION['message']; unset($_SESSION['message']); } ?>
                 <form action="/phpmotors/accounts/index.php" method="post">
                     <input type="hidden" name="action" value="Login">
                     <div class="field">
