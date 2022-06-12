@@ -47,6 +47,11 @@
             // A valid password exists, proceed with the login process
             // Query the client data based on the email address
             $clientData = getClient($clientEmail);
+            if(!$clientData){
+                $_SESSION['message'] = '<p class="notice">Please provide a valid email address and password.</p>';
+                include '../view/login.php';
+                exit;
+            }
             // Compare the password just submitted against
             // the hashed password for the matching client
             $hashCheck = password_verify($clientPassword, $clientData['clientPassword']);
@@ -106,17 +111,17 @@
             if($regOutcome === 1){
                 setcookie('firstname', $clientFirstname, strtotime('+1 year'), '/');
                 $_SESSION['message'] = "<p class='success'>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
-                header('Location: /phpmotors/accounts/?action=login');
-                exit;
+                header('Location: /phpmotors/accounts/?action=login-page');
+                break;
             } else {
                 $_SESSION['message'] = "<p class='notice'>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
                 include '../view/registration.php';
-                exit;
+                break;
             }
 
         case 'logout':
             session_destroy();
-            header('Location: /phpmotors/accounts/?action=login');
+            header('Location: /phpmotors/accounts/?action=login-page');
             exit;
             break;
                 
