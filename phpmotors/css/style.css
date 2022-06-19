@@ -293,12 +293,15 @@ figure figcaption {
   margin-bottom: 1rem;
 }
 
-.field input {
+.field input, .field textarea, .field select {
   display: block;
+  min-width: 200px;
 }
+
 .btn {
   display: block;
   font-size: 1.1rem;
+  cursor: pointer;
 }
 
 .btn--primary {
@@ -321,8 +324,10 @@ input:focus:valid, textarea:focus:valid {
 
 .success {
   color: darkgreen;
+  font-style: italic;
 }
 
 .notice {
   color: darkred;
+  font-style: italic;
 }

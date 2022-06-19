@@ -125,9 +125,81 @@
             exit;
             break;
                 
+        case 'update':
+            $pageTitle = 'Manage Account';
+            $clientInfo = getClient($_SESSION['clientData']['clientEmail']);
+            $clientId = $_SESSION['clientData']['clientId'];
+            include '../view/client-update.php';
+            break;
+
+        case 'updateAccount':
+            $pageTitle = 'Manage Account';
+            $clientInfo = getClient($_SESSION['clientData']['clientEmail']);
+            $clientId = filter_input(INPUT_POST, 'clientId',FILTER_SANITIZE_NUMBER_INT);
+            $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+            $clientEmail = checkEmail($clientEmail);
+            $emailCheck = checkExistingEmail($clientEmail);
+            if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail)) {
+                $_SESSION['message'] = '<p class="notice">Please provide information for all empty form fields</p>';
+                include '../view/client-update.php';
+                exit;
+            }
+            if ($emailCheck && $clientEmail != $_SESSION['clientData']['clientEmail']) {
+                $_SESSION['message'] = '<p class="notice">Email already exists. Please choose a different email.</p>';
+                include '../view/client-update.php';
+                exit;
+            }
+            $updateResult = updateClient($clientFirstname,$clientLastname,$clientEmail,$clientId);
+            if ($updateResult) {
+                $_SESSION['message'] = "<p class='success'>$clientFirstname, your account has been successfully updated.</p>";
+                $clientData = getClientById($clientId);
+                // remove password
+                array_pop($clientData);
+                $_SESSION['clientData'] = $clientData;
+                header('Location: /phpmotors/accounts/');
+                exit;
+            } else {
+                $_SESSION['message'] = "<p class='notice'>Sorry $clientFirstname, account failed to update.</p>";
+                include '../view/client-update.php';
+                exit;
+            }
+            break;
+
+        case 'updatePassword':
+            $pageTitle = 'Manage Account';
+            $clientId = filter_input(INPUT_POST, 'clientId',FILTER_SANITIZE_NUMBER_INT);
+            $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $checkPassword = checkPassword($clientPassword);
+            if (empty($checkPassword)) {
+            $_SESSION['message'] = '<p class="notice">Invalid Password.</p>';
+                include '../view/client-update.php';
+                exit;
+            }
+            $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+            $updatePassOutcome = updatePassword($hashedPassword,$clientId);
+            if ($updatePassOutcome === 1) {
+                $_SESSION['message'] = "<p class='success'>Password succesfully changed!</p>";
+                $clientData = getClientById($clientId);
+                // remove password
+                array_pop($clientData);
+                $_SESSION['clientData'] = $clientData;
+                header('Location: /phpmotors/accounts/');
+                exit;
+            } else {
+                $_SESSION['message'] = "<p class='notice'>Sorry $clientFirstname, but the update failed. Please try again.</p>";
+                include '../view/client-update.php';
+                exit;
+            }
+            $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+            break;
+
         default:
             $pageTitle = 'Home';
-            header('Location: ../index.php');
+            include '../view/admin.php';
             break;
     } 
 ?>
