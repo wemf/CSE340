@@ -169,6 +169,8 @@
 
         case 'updatePassword':
             $pageTitle = 'Manage Account';
+            $clientInfo = getClient($_SESSION['clientData']['clientEmail']);
+            $clientFirstname = $_SESSION['clientData']['clientFirstname'];
             $clientId = filter_input(INPUT_POST, 'clientId',FILTER_SANITIZE_NUMBER_INT);
             $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $checkPassword = checkPassword($clientPassword);
@@ -182,7 +184,6 @@
             if ($updatePassOutcome === 1) {
                 $_SESSION['message'] = "<p class='success'>Password succesfully changed!</p>";
                 $clientData = getClientById($clientId);
-                // remove password
                 array_pop($clientData);
                 $_SESSION['clientData'] = $clientData;
                 header('Location: /phpmotors/accounts/');
@@ -192,9 +193,6 @@
                 include '../view/client-update.php';
                 exit;
             }
-            $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
             break;
 
         default:

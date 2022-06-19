@@ -109,7 +109,7 @@ switch ($action) {
         }
         $updateResult = updateVehicle($classificationId, $invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $invId);
         if ($updateResult) {
-            $_SESSION['message'] = "<p class='success'>Congratulations, the $Make $Model was successfully updated.</p>";
+            $_SESSION['message'] = "<p class='success'>Congratulations the $Make $Model was successfully updated.</p>";
             header('location: /phpmotors/vehicles/');
             exit;
         } else {
@@ -146,7 +146,7 @@ switch ($action) {
         
         $deleteResult = deleteVehicle($invId);
         if ($deleteResult) {
-            $_SESSION['message'] = "<p class='success'>Congratulations the, $invMake $invModel was	successfully deleted.</p>";
+            $_SESSION['message'] = "<p class='success'>Congratulations the $invMake $invModel was successfully deleted.</p>";
             header('location: /phpmotors/vehicles/');
             exit;
         } else {
