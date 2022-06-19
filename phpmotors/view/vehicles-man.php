@@ -22,7 +22,6 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
             </nav>
             <main>
                 <h2>Vehicle Management</h2>
-                <?php if (isset($_SESSION['message'])) { echo $_SESSION['message']; unset($_SESSION['message']); } ?>
                 <ul>
                     <li>
                         <a class="blackfont" href="/phpmotors/vehicles/index.php?action=add-vehicle">Add Vehicle</a><br>
@@ -31,11 +30,24 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
                         <a class="blackfont" href="/phpmotors/vehicles/index.php?action=add-classification">Add Classification</a>
                     </li>
                 </ul>
+                <?php
+                    if (isset($_SESSION['message'])) { echo $_SESSION['message']; unset($_SESSION['message']); }
+                    if (isset($classificationList)) { 
+                        echo '<h2>Vehicles By Classification</h2>'; 
+                        echo '<p>Choose a classification to see those vehicles</p>'; 
+                        echo $classificationList; 
+                    }
+                ?>
+                <noscript>
+                    <p><strong>JavaScript Must Be Enabled to Use this Page.</strong></p>
+                </noscript>
+                <table id="inventoryDisplay"></table>
             </main>
             <hr>
             <footer>
                 <?php include $_SERVER['DOCUMENT_ROOT'] . "/phpmotors/common/footer.php" ?>
             </footer>
+            <script src="../js/inventory.js"></script>
         </div>
     </body>
 </html>
