@@ -155,7 +155,7 @@
             if ($updateResult) {
                 $_SESSION['message'] = "<p class='success'>$clientFirstname, your account has been successfully updated.</p>";
                 $clientData = getClientById($clientId);
-                // remove password
+                // UPDATE USER SESSION
                 array_pop($clientData);
                 $_SESSION['clientData'] = $clientData;
                 header('Location: /phpmotors/accounts/');

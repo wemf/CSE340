@@ -98,6 +98,7 @@ function updateVehicle($classificationId, $invMake, $invModel, $invDescription, 
     return $rowsChanged;
 }
 
+// Delete a vehicle
 function deleteVehicle($invId) {
     $db = phpmotorsConnect();
     $sql = 'DELETE FROM inventory WHERE invId = :invId';
