@@ -331,3 +331,70 @@ input:focus:valid, textarea:focus:valid {
   color: darkred;
   font-style: italic;
 }
+
+#inv-display{
+  padding: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+ 
+#inv-display li{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  width: 200px;
+  height: 250px;
+  text-align: center;
+  justify-self: center;
+  list-style-type: none;
+  border: 1px #ccc solid;
+  border-radius: 0.75rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: .5em;
+}
+ 
+#inv-display li img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-top-right-radius: 0.75rem;
+  border-top-left-radius: 0.75rem;
+}
+
+#inv-display li hr{
+  width: 100%;
+  margin: 0;
+  border: 1px solid #3a3a3a;
+}
+
+#inv-display li h2 {
+  margin: 0;
+  text-align: center;
+}
+
+#inv-display li span{
+  text-align: center;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+
+	#inv-display h2{
+		font-size: 1rem;
+	}
+
+	#inv-display li {
+		max-width: 200px;
+		flex: 1 0 auto;
+		
+	}
+      
+	#inv-display div {
+		width: 100%;
+	}
+}
