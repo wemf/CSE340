@@ -171,7 +171,7 @@ switch ($action) {
         $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $invInfo = getInvItemInfo($invId);
         if(!$invInfo) {
-            $_SESSION['message'] = "<p class='notice'>Vehicle could not be found.</p>";
+            $_SESSION['message'] = "<h2 class='notice'>Vehicle could not be found.</h2>";
             http_response_code(404);
             include '../view/404.php';
             exit;
