@@ -40,7 +40,7 @@ function buildVehiclesDisplay($vehicles){
         $dv .= '<li>';
         $dv .= "<img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
         $dv .= '<hr>';
-        $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
+        $dv .= "<h2><a href='/phpmotors/vehicles?action=getVehicleInfo&invId=$vehicle[invId]'>$vehicle[invMake] $vehicle[invModel]</a></h2>";
         $dv .= "<span>$".number_format($vehicle['invPrice'],0)."</span>";
         $dv .= '</li>';
     }

@@ -155,16 +155,28 @@ switch ($action) {
             exit;
         }
         break;
-        
+
     case 'classification':
         $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $vehicles = getVehiclesByClassification($classificationName);
         if(!count($vehicles)){
-            $message = "<p class='notice'>Sorry, no $classificationName could be found.</p>";
+            $_SESSION['message'] = "<p class='notice'>Sorry, no $classificationName could be found.</p>";
         } else {
             $vehicleDisplay = buildVehiclesDisplay($vehicles);
         }
         include '../view/classification.php';
+        break;
+    
+    case 'getVehicleInfo':
+        $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $invInfo = getInvItemInfo($invId);
+        if(!$invInfo) {
+            $_SESSION['message'] = "<p class='notice'>Vehicle could not be found.</p>";
+            http_response_code(404);
+            include '../view/404.php';
+            exit;
+        }
+        include '../view/vehicle-info.php';
         break;
            
     default:
