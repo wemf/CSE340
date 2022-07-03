@@ -20,7 +20,10 @@
                     <?php if (isset($_SESSION['message'])) { echo $_SESSION['message']; unset($_SESSION['message']); } ?>
                     <div class="vehicle-details">
                         <div class="left-section">
-                            <img class="vehicle-details-image" src="<?= $invInfo['invImage']; ?>" alt="<?= $invInfo['invMake'].' '.$invInfo['invModel']; ?> "/>
+                            <div class="vehicle-gallery">
+                                <?php if(isset($vehicleThumbnailDisplay)){ echo $vehicleThumbnailDisplay; } ?>
+                                <img class="vehicle-details-image" src="<?= $invInfo['invImage']; ?>" alt="<?= $invInfo['invMake'].' '.$invInfo['invModel']; ?> "/>
+                            </div>
                             <p>
                                 <span>Price: $<?= number_format($invInfo['invPrice'], 0) ?></span>
                             </p>

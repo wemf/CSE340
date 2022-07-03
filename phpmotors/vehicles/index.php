@@ -2,6 +2,7 @@
 require_once '../library/connections.php'; // database connection file
 require_once '../model/main-model.php'; // model file for main
 require_once '../model/vehicles-model.php'; // model file for vehicles
+require_once '../model/uploads-model.php'; // model file for uploads
 require_once '../library/functions.php'; 
 //Create or access a Session
 session_start();
@@ -122,7 +123,7 @@ switch ($action) {
 
     case 'mod':
         $invId = filter_input(INPUT_GET, 'invId', FILTER_VALIDATE_INT);
-        $invInfo = getInvItemInfo($invId);
+        $invInfo = getVehicleById($invId);
         if(count($invInfo)<1){
             $_SESSION['message'] = 'Sorry, no vehicle information could be found.';
         }
@@ -132,7 +133,7 @@ switch ($action) {
         break;
     case 'del':
         $invId = filter_input(INPUT_GET, 'invId', FILTER_VALIDATE_INT);
-        $invInfo = getInvItemInfo($invId);
+        $invInfo = getVehicleById($invId);
         if (count($invInfo) < 1) {
             $_SESSION['message'] = 'Sorry, no vehicle information could be found.';
         }
@@ -169,13 +170,15 @@ switch ($action) {
     
     case 'getVehicleInfo':
         $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $invInfo = getInvItemInfo($invId);
+        $invInfo = getVehicleById($invId);
         if(!$invInfo) {
             $_SESSION['message'] = "<h2 class='notice'>Vehicle could not be found.</h2>";
             http_response_code(404);
             include '../view/404.php';
             exit;
         }
+        $thumbnailById = getThumbnailById($invId);
+        $vehicleThumbnailDisplay = buildThumbnailDisplay($thumbnailById);
         include '../view/vehicle-info.php';
         break;
            

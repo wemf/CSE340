@@ -390,7 +390,7 @@ input:focus:valid, textarea:focus:valid {
 
 .vehicle-details-image {
   display: block;
-  width: 100%;
+  max-width: 100%;
 }
 
 .vehicle-details-attributes {
@@ -414,6 +414,16 @@ input:focus:valid, textarea:focus:valid {
   margin: 0;
 }
 
+.vehicle-gallery {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.vehicle-thumbnails {
+  list-style: none;
+  display: flex;
+  padding-left: 0;
+}
+
 @media (min-width: 768px) {
 
 	#inv-display h2{
@@ -430,10 +440,26 @@ input:focus:valid, textarea:focus:valid {
 		width: 100%;
 	}
 
+  .left-section {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .vehicle-gallery {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: fit-content(120px) 1fr;
+  }
+  
+  .vehicle-thumbnails {
+    flex-direction: column;
+    max-width: 120px;
+  }
+
   .vehicle-details{
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: minmax(50%, 1fr) 1fr;
     padding: 0;
     text-align: left;
   }
@@ -445,4 +471,32 @@ input:focus:valid, textarea:focus:valid {
 
 .radio-fieldset label {
   display: flex;
+}
+
+.vehicle-thumbnails li:hover {
+  transition: 0.4s;
+  transform: scale(1.5);
+}
+
+.vehicle-thumbnails img{
+  max-width: 120px;
+}
+
+.vehicle-image-managment {
+  display: grid;
+  list-style: none;
+  padding: 0;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.vehicle-image-managment li {
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  justify-self: center;
+}
+
+.vehicle-image-managment img {
+  max-width: 200px;
 }

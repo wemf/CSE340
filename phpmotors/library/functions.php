@@ -58,11 +58,11 @@ function makeThumbnailName($image) {
    
 // Build images display for image management view
 function buildImageDisplay($imageArray) {
-    $id = '<ul id="image-display">';
+    $id = '<ul class="vehicle-image-managment">';
     foreach ($imageArray as $image) {
         $id .= '<li>';
-        $id .= "<img src='$image[imgPath]' title='$image[invMake] $image[invModel] image on PHP Motors.com' alt='$image[invMake] $image[invModel] image on PHP Motors.com'>";
-        $id .= "<p><a href='/phpmotors/uploads?action=delete&imgId=$image[imgId]&filename=$image[imgName]' title='Delete the image' id='delete-button'>Delete $image[imgName]</a></p>";
+        $id .= "<img src='$image[imgPath]' title='$image[invMake] $image[invModel]' alt='$image[invMake] $image[invModel]'/>";
+        $id .= "<a href='/phpmotors/uploads?action=delete&imgId=$image[imgId]&filename=$image[imgName]' title='Delete the image'>Delete $image[imgName]</a>";
         $id .= '</li>';
     }
     $id .= '</ul>';
@@ -186,7 +186,7 @@ function resizeImage($old_image_path, $new_image_path, $max_width, $max_height) 
 }
    
 function buildThumbnailDisplay($imageArray) {
-    $id = '<ul id="thumbnail-display">';
+    $id = '<ul class="vehicle-thumbnails">';
     foreach ($imageArray as $image) {
         $id .= '<li>';
         $id .= "<img src='$image[imgPath]' alt='This is a thumbnail of a vehicle'>";

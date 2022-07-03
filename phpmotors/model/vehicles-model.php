@@ -131,3 +131,15 @@ function getVehicles(){
 	$stmt->closeCursor();
 	return $invInfo;
 }
+
+function getVehicleById($invId){
+    $db = phpmotorsConnect();
+    $sql = 'SELECT inv.invId, inv.invMake, inv.invModel, inv.invDescription, images.imgPath AS invImage, inv.invDescription, inv.invPrice, inv.invStock, inv.invColor, inv.classificationId FROM inventory AS inv LEFT JOIN images ON inv.invId = images.invId AND images.imgPrimary = 1 WHERE inv.invId =:invId LIMIT 1';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->execute();
+    $vehicle = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $vehicle;
+}
+   
