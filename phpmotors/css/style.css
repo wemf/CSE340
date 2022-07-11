@@ -45,10 +45,19 @@ h1 {
 /**
 Header styles
  */
-header div {
+header .header-container {
   display: flex;
   justify-content: space-between;
-  width: 95%;
+  padding: 0 0.5rem;
+}
+
+.header__right {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.header__right p {
+  align-self: center;
 }
 
 header a {
@@ -499,4 +508,18 @@ input:focus:valid, textarea:focus:valid {
 
 .vehicle-image-managment img {
   max-width: 200px;
+}
+
+.search-form input {
+  width: 100%;
+}
+
+.search-form {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-results {
+  list-style: none;
 }
