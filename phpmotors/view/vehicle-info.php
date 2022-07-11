@@ -22,10 +22,13 @@
                         <div class="left-section">
                             <div class="vehicle-gallery">
                                 <?php if(isset($vehicleThumbnailDisplay)){ echo $vehicleThumbnailDisplay; } ?>
-                                <img class="vehicle-details-image" src="<?= $invInfo['invImage']; ?>" alt="<?= $invInfo['invMake'].' '.$invInfo['invModel']; ?> "/>
+                                <img class="vehicle-details-image" src="<?= is_null($invInfo['invImage']) ? '/phpmotors/images/no-image.png' : $invInfo['invImage']; ?>" alt="<?= $invInfo['invMake'].' '.$invInfo['invModel']; ?> "/>
                             </div>
                             <p>
                                 <span>Price: $<?= number_format($invInfo['invPrice'], 0) ?></span>
+                            </p>
+                            <p>
+                                <span>Year: <?= $invInfo['invYear'] ?></span>
                             </p>
                         </div>
                         <div class="right-section">
@@ -38,7 +41,7 @@
                                     <p><strong>Color:</strong><?= $invInfo['invColor']; ?></p>
                                 </li>
                                 <li>
-                                    <p><strong>In Stock:</strong><?= $invInfo['invStock']; ?></p>
+                                    <p><strong>Miles:</strong><?= $invInfo['invMiles']; ?></p>
                                 </li>
                             </ul>
                         </div>

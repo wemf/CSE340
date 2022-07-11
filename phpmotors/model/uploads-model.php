@@ -2,25 +2,23 @@
 
 // Model for vehicle inventory image uploads
 // Add image information to the database table
-function storeImages($imgPath, $invId, $imgName, $imgPrimary) {
+function storeImages($imgPath, $invId, $imgName) {
     $db = phpmotorsConnect();
-    $sql = 'INSERT INTO images (invId, imgPath, imgName, imgPrimary) VALUES (:invId, :imgPath, :imgName, :imgPrimary)';
+    $sql = 'INSERT INTO images (invId, imgPath, imgName) VALUES (:invId, :imgPath, :imgName)';
     $stmt = $db->prepare($sql);
     // Store the full size image information
-    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_STR);
     $stmt->bindValue(':imgPath', $imgPath, PDO::PARAM_STR);
     $stmt->bindValue(':imgName', $imgName, PDO::PARAM_STR);
-    $stmt->bindValue(':imgPrimary', $imgPrimary, PDO::PARAM_INT);
     $stmt->execute();
     // Make and store the thumbnail image information
     // Change name in path
     $imgPath = makeThumbnailName($imgPath);
     // Change name in file name
     $imgName = makeThumbnailName($imgName);
-    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_STR);
     $stmt->bindValue(':imgPath', $imgPath, PDO::PARAM_STR);
     $stmt->bindValue(':imgName', $imgName, PDO::PARAM_STR);
-    $stmt->bindValue(':imgPrimary', $imgPrimary, PDO::PARAM_INT);
     $stmt->execute();
     $rowsChanged = $stmt->rowCount();
     $stmt->closeCursor();
@@ -64,9 +62,9 @@ function checkExistingImage($imgName){
 
 function getThumbnailById($invId){
     $db = phpmotorsConnect();
-    $sql = 'SELECT imgPath FROM images WHERE invId = :invId AND imgPrimary = 0 AND imgPath LIKE "%-tn%"';
+    $sql = 'SELECT imgPath FROM images WHERE invId = :invId AND imgPath LIKE "%-tn%"';
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_STR);
     $stmt->execute();
     $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();

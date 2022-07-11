@@ -25,15 +25,6 @@
                         <label for="invId">Vehicle</label><br/>
                         <?php echo $prodSelect; ?>
                     </div>
-                    <fieldset class="radio-fieldset">
-                        <legend>Is this the main image for the vehicle?</legend>
-                        <label for="yes">Yes
-                            <input type="radio" name="imgPrimary" id="yes" value="1">
-                        </label>
-                        <label for="no">No
-                            <input type="radio" name="imgPrimary" id="no" checked value="0">
-                        </label>
-                    </fieldset>
                     <div class="field">
                         <label for="file1">Upload Image:</label><br/>
                         <input type="file" name="file1" id="file1">

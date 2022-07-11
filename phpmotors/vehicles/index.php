@@ -56,21 +56,20 @@ switch ($action) {
         $invMake = trim(filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $invModel = trim(filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_FULL_SPECIAL_CHARS)); 
         $invDescription = trim(filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-        $invImage = trim(filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-        $invThumbnail = trim(filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $invYear = trim(filter_input(INPUT_POST, 'invYear', FILTER_SANITIZE_NUMBER_FLOAT));
         $invPrice = trim(filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT));
-        $invStock = trim(filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT));
+        $invMiles = trim(filter_input(INPUT_POST, 'invMiles', FILTER_SANITIZE_NUMBER_INT));
         $invColor = trim(filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $classificationId = trim(filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_NUMBER_INT));
         
-        if(empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor) || empty($classificationId)){
+        if(empty($invMake) || empty($invModel) || empty($invDescription) || empty($invYear) || empty($invPrice) || empty($invMiles) || empty($invColor) || empty($classificationId)){
             $_SESSION['message'] = '<p class="notice">Please provide information for all empty form fields.</p>';
             include '../view/add-vehicle.php';
             exit;
             break;
         }
 
-        $regOutcome = addVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId);
+        $regOutcome = addVehicle($invYear, $invMake, $invModel, $invDescription, $invPrice, $invMiles, $invColor, $classificationId);
         if($regOutcome === 1){
             $_SESSION['message'] = "<p class='success'>Vehicle saved succesfully.</p>";
         } else {
@@ -96,19 +95,18 @@ switch ($action) {
         $invMake = filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $invModel = filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $invDescription = filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $invImage = filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $invThumbnail = filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $invYear = filter_input(INPUT_POST, 'invYear', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         $invPrice = filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT);
+        $invMiles = filter_input(INPUT_POST, 'invMiles', FILTER_SANITIZE_NUMBER_INT);
         $invColor = filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         
-        if (empty($classificationId) || empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor)) {
+        if (empty($classificationId) || empty($invMake) || empty($invModel) || empty($invDescription) || empty($invYear) || empty($invPrice) || empty($invMiles) || empty($invColor) || empty($invId)) {
             $_SESSION['message'] = '<p class="notice">Please complete all information for the new item! Double check the classification of the item.</p>';
             include '../view/new-item.php';
             exit;
         }
-        $updateResult = updateVehicle($classificationId, $invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $invId);
+        $updateResult = updateVehicle($invId, $invYear, $invMake, $invModel, $invDescription, $invPrice, $invMiles, $invColor, $classificationId);
         if ($updateResult) {
             $_SESSION['message'] = "<p class='success'>Congratulations the $Make $Model was successfully updated.</p>";
             header('location: /phpmotors/vehicles/');
@@ -122,7 +120,7 @@ switch ($action) {
         break;
 
     case 'mod':
-        $invId = filter_input(INPUT_GET, 'invId', FILTER_VALIDATE_INT);
+        $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $invInfo = getVehicleById($invId);
         if(count($invInfo)<1){
             $_SESSION['message'] = 'Sorry, no vehicle information could be found.';
@@ -132,7 +130,7 @@ switch ($action) {
         exit;
         break;
     case 'del':
-        $invId = filter_input(INPUT_GET, 'invId', FILTER_VALIDATE_INT);
+        $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $invInfo = getVehicleById($invId);
         if (count($invInfo) < 1) {
             $_SESSION['message'] = 'Sorry, no vehicle information could be found.';
@@ -143,7 +141,7 @@ switch ($action) {
     case 'deleteVehicle':
         $invMake = filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $invModel = filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         
         $deleteResult = deleteVehicle($invId);
         if ($deleteResult) {

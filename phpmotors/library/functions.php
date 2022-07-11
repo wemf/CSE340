@@ -37,8 +37,9 @@ function buildClassificationList($classifications){
 function buildVehiclesDisplay($vehicles){
     $dv = '<ul id="inv-display">';
     foreach ($vehicles as $vehicle) {
+        $thumbnail = is_null($vehicle['invThumbnail']) ? '/phpmotors/images/no-image.png' : $vehicle['invThumbnail'];
         $dv .= '<li>';
-        $dv .= "<a href='/phpmotors/vehicles?action=getVehicleInfo&invId=$vehicle[invId]'><img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'></a>";
+        $dv .= "<a href='/phpmotors/vehicles?action=getVehicleInfo&invId=$vehicle[invId]'><img src='$thumbnail' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'></a>";
         $dv .= '<hr>';
         $dv .= "<h2><a href='/phpmotors/vehicles?action=getVehicleInfo&invId=$vehicle[invId]'>$vehicle[invMake] $vehicle[invModel]</a></h2>";
         $dv .= "<span>$".number_format($vehicle['invPrice'],0)."</span>";
@@ -194,4 +195,8 @@ function buildThumbnailDisplay($imageArray) {
     }
     $id .= '</ul>';
     return $id;
+}
+
+function GUID() {
+    return strtoupper(bin2hex(openssl_random_pseudo_bytes(8)));
 }

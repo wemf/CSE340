@@ -64,20 +64,16 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
                             <textarea name="invDescription" id="invDescription" required><?php if(isset($invDescription)){ echo $invDescription; } elseif(isset($invInfo['invDescription'])) {echo $invInfo['invDescription']; }?></textarea>
                         </div>
                         <div class="field">
-                            <label for="invImage">Image Path:</label><br>
-                            <input type="text" name="invImage" id="invImage" <?php if(isset($invImage)){echo "value='$invImage'";} elseif(isset($invInfo['invImage'])) {echo "value='$invInfo[invImage]'"; } else {echo "value='/phpmotors/images/no-image.png'";} ?> required>
-                        </div>
-                        <div class="field">
-                            <label for="invThumbnail">Thumbnail Path:</label><br>
-                            <input type="text" name="invThumbnail" id="invThumbnail" <?php if(isset($invThumbnail)){echo "value='$invThumbnail'";} elseif(isset($invInfo['invThumbnail'])) {echo "value='$invInfo[invThumbnail]'"; } else {echo "value='/phpmotors/images/no-image.png'";} ?> required>
+                            <label for="invYear">Year:</label><br>
+                            <input type="text" name="invYear" id="invYear" <?php if(isset($invYear)){ echo "value='$invYear'"; } elseif(isset($invInfo['invYear'])) {echo "value='$invInfo[invYear]'"; }?> required>
                         </div>
                         <div class="field">
                             <label for="invPrice">Price:</label><br>
                             <input type="text" name="invPrice" id="invPrice" <?php if(isset($invPrice)){ echo "value='$invPrice'"; } elseif(isset($invInfo['invPrice'])) {echo "value='$invInfo[invPrice]'"; }?> required>
                         </div>
                         <div class="field">
-                            <label for="invStock">Stock:</label><br>
-                            <input type="text" name="invStock" id="invStock" <?php if(isset($invStock)){ echo "value='$invStock'"; } elseif(isset($invInfo['invStock'])) {echo "value='$invInfo[invStock]'"; }?> required>
+                            <label for="invMiles">Miles:</label><br>
+                            <input type="text" name="invMiles" id="invMiles" <?php if(isset($invMiles)){ echo "value='$invMiles'"; } elseif(isset($invInfo['invMiles'])) {echo "value='$invInfo[invMiles]'"; }?> required>
                         </div>
                         <div class="field">
                             <label for="invColor">Color:</label><br>
