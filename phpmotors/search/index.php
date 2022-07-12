@@ -18,6 +18,7 @@ if ($action == NULL) {
 
 switch ($action) {
     case 'q':
+        $limit = 5;
         $query = filter_input(INPUT_GET, 'query', FILTER_SANITIZE_STRING);
         $results = $results_count = 0;
         if (empty($query)) {
@@ -25,8 +26,16 @@ switch ($action) {
             include '../view/search-page.php';
             exit;
         }
-        $results = searchvehicles($query);
-        $results_count = count($results);
+        if (!isset($_GET['page'])) {
+            $page = 1;
+        } else{
+            $page = $_GET['page'];
+        }
+        $results_count = searchGetTotalVehicles($query);
+        $from = ($page-1) * $limit;
+        $to = $from + $limit;
+        $total_pages = ceil($results_count/$limit);
+        $results = searchVehicles($query, $to, $from);
         include '../view/search-page.php';
         break;
     default:

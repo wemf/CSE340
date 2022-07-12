@@ -30,15 +30,39 @@
                 <?php 
                 if(isset($query) && !empty($query)){
                     echo "<h2>Returned $results_count results for: $query</h2>";
+                    if($results_count==0){
+                        echo "<h3 class='notice'>Sorry, no results were found to match $query.</h3>";
+                    }
                     echo "<ul class='search-results'>";
-                    if(is_array($results)){
+                    if(is_array($results) && $results_count > 0){
                         foreach ($results as $vehicle) {
                             echo "<li>";
-                            echo "<a href='/phpmotors/vehicles/?action=getVehicleInfo&invId=$vehicle[invId]' target='_blank'>$vehicle[invYear] $vehicle[invMake] $vehicle[invModel]</a>";
+                            echo "<a href='/phpmotors/vehicles/?action=getVehicleInfo&invId=$vehicle[invId]'>$vehicle[invYear] $vehicle[invMake] $vehicle[invModel]</a>";
                             echo "<p>$vehicle[invDescription]</p>";
                             echo "</li>";
                         }
                         echo "</ul>";
+                        if($total_pages > 1) {
+                            echo "<ul class='search-pagination'>";
+                            if($page > 1) {
+                                $previous_page = $page -1;
+                                if($previous_page > 0){
+                                    echo "<li><a href='/phpmotors/search?action=q&query=$query&page=$previous_page' title='navigate previous page'><<<</a></li>";
+                                }
+                            }
+                            for($i = 1; $i <= $total_pages; $i++){
+                                if($page == $i){
+                                    echo "<li>$i</li>";
+                                } else {
+                                    echo "<li><a href='/phpmotors/search?action=q&query=$query&page=$i' title='navigate page $i'>$i</a></li>";
+                                }
+                            }
+                            $next_page = $page +1;
+                            if($next_page <= $total_pages){
+                                echo "<li><a href='/phpmotors/search?action=q&query=$query&page=$next_page' title='navigate next page'>>>></a></li>";
+                            }
+                            echo "</ul>";
+                        }
                     }
                 }
                 ?>

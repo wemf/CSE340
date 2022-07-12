@@ -522,4 +522,16 @@ input:focus:valid, textarea:focus:valid {
 
 .search-results {
   list-style: none;
+  padding: .5rem;
+}
+
+.search-pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  gap: .5rem;
+  max-width: 400px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
