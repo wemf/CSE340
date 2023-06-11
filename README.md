@@ -9,4 +9,4 @@ You need to install XAMP, MAMP, or Docker if you feel more expert to set a PHP w
 ## Getting started
 Navigate each week through commits. You might need to update de file `phpmotors/library/connections.php` and use your own credentials. 
 ## Contributors
- - @wemf
+ - [@wmezadev](https://github.com/wmezadev/)
